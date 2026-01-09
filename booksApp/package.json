@@ -1,0 +1,15 @@
+{
+  "name": "booksapp",
+  "version": "1.0.0",
+  "description": "sls services",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
