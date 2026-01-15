@@ -10,13 +10,14 @@ plugins:
 provider:
   name: aws
   runtime: nodejs20.x
+  region: "ap-south-1"
   # Uncomment to easily set up a custom domain. Read the docs for more details:
   # https://www.serverless.com/framework/docs/providers/aws/guide/domains
   # domain: api.example.com
 
 functions:
   getBook:
-    handler: handler.getBook
+    handler: dist/handlers/getBook.getBook
     description: Gets the List of books
     events:
       - httpApi:
@@ -24,29 +25,29 @@ functions:
           method: get
 
   createBook:
-    handler: handler.createBook
+    handler: dist/handlers/createBook.createBook
     description: Creates the Book
     events:
       - httpApi:
           path: /createBook
           method: post
 
-  deletBook:
-    handler: handler.deleteBook
+  deleteBook:
+    handler: dist/handlers/deleteBook.deleteBook
     description: deletes the List of books
     events:
       - httpApi:
           path: /getBook
           method: delete
   updateBook:
-    handler: handler.updateBook
+    handler: dist/handlers/updateBook.updateBook
     description: updates the List of books
     events:
       - httpApi:
           path: /updateBook
           method: post
   getBookbyId:
-    handler: handler.getBookbyId
+    handler: dist/handlers/getBookbyId.getBookbyId
     description: Gets the List of books by ID
     events:
       - httpApi:

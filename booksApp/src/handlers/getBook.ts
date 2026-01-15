@@ -3,7 +3,7 @@ export async function getBook(event: any) {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: "Showing the BookList",
+      message: "Showing the BookLists",
     }),
   };
 }
