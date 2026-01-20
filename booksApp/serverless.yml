@@ -51,5 +51,5 @@ functions:
     description: Gets the List of books by ID
     events:
       - httpApi:
-          path: /getBookbyId
+          path: /getBookbyId{id}
           method: get
