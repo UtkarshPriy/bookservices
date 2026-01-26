@@ -4,18 +4,52 @@ org: selflearn20
 app: booksapp
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: booksApp
+plugins:
+  - serverless-offline
 
 provider:
   name: aws
   runtime: nodejs20.x
+  region: "ap-south-1"
   # Uncomment to easily set up a custom domain. Read the docs for more details:
   # https://www.serverless.com/framework/docs/providers/aws/guide/domains
   # domain: api.example.com
 
 functions:
-  hello:
-    handler: handler.hello
+  getBook:
+    handler: dist/handlers/getBook.getBook
+    description: Gets the List of books
     events:
       - httpApi:
-          path: /
+          path: /getBook
+          method: get
+
+  createBook:
+    handler: dist/handlers/createBook.createBook
+    description: Creates the Book
+    events:
+      - httpApi:
+          path: /createBook
+          method: post
+
+  deleteBook:
+    handler: dist/handlers/deleteBook.deleteBook
+    description: deletes the List of books
+    events:
+      - httpApi:
+          path: /getBook
+          method: delete
+  updateBook:
+    handler: dist/handlers/updateBook.updateBook
+    description: updates the List of books
+    events:
+      - httpApi:
+          path: /updateBook
+          method: post
+  getBookbyId:
+    handler: dist/handlers/getBookbyId.getBookbyId
+    description: Gets the List of books by ID
+    events:
+      - httpApi:
+          path: /getBookbyId{id}
           method: get
