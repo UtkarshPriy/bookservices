@@ -16,7 +16,8 @@ class CreateBookHandler {
     // Validation of body
     const body = JSON.parse(event.body);
     const safeBody = bookSchema.parse(body);
-    // BookModel(safeBody);
+    // console.log(safeBody);
+
     const book = await this.bookModel.createBook(safeBody);
 
     return {

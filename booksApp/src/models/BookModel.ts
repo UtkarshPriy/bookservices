@@ -12,6 +12,12 @@ export class BookModel {
   async getBookbyId(bookId: string): Promise<Book> {
     return await this.bookRepo.getBookbyId(bookId);
   }
+  async deleteBook(bookId: string): Promise<Book> {
+    return await this.bookRepo.deleteBook(bookId);
+  }
+  async getBook(): Promise<Book> {
+    return await this.bookRepo.getBook();
+  }
 }
 
 export function createBookmodel() {
