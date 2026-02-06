@@ -10,7 +10,11 @@ class getBookbyIdHandler {
     if (typeof id !== "string") {
       throw Error("Invalid Id format ");
     }
-    const book = this.bookModel.getBookbyId(id);
+    const book = await this.bookModel.getBookbyId(id);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(book),
+    };
   }
 }
 

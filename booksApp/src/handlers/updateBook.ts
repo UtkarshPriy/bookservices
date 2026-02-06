@@ -1,14 +1,18 @@
 import { BookModel, createBookmodel } from "../models/BookModel.js";
 import { createBookRepo } from "../repositories/BookRepo.js";
 import z from "zod";
+import BookRepo, {
+  updateBookSchema,
+  bookData,
+} from "../repositories/BookRepo.js";
 export const inputSchema = z.object({ id: z.string() });
-export type inputTye = z.infer<typeof inputSchema>;
+export type inputType = z.infer<typeof inputSchema>;
 class updateBookHandler {
   constructor(private readonly bookModel: BookModel) {}
   async processEvent(event: any) {
     const body = JSON.parse(event.body);
     // Validate
-    const safeInput = inputSchema.parse(body);
+    const safeInput = bookData.parse(body);
 
     const updatedData = await this.bookModel.updateBook(safeInput);
 
