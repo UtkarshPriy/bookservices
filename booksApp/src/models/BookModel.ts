@@ -4,6 +4,7 @@ import BookRepo, {
   Book,
   createBookRepo,
   updateBookSchema,
+  GetBooksResult,
 } from "../repositories/BookRepo.js";
 export class BookModel {
   constructor(private readonly bookRepo: BookRepo) {}
@@ -19,8 +20,11 @@ export class BookModel {
   async deleteBook(bookId: string): Promise<Book> {
     return await this.bookRepo.deleteBook(bookId);
   }
-  async getBook(): Promise<Book> {
-    return await this.bookRepo.getBook();
+  async getBook(
+    limit?: number,
+    lastEvaluatedKey?: string,
+  ): Promise<GetBooksResult> {
+    return await this.bookRepo.getBook(limit, lastEvaluatedKey);
   }
 }
 

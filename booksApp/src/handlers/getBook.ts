@@ -3,11 +3,17 @@ import { BookModel, createBookmodel } from "../models/BookModel.js";
 class getBookHandler {
   constructor(private readonly bookModel: BookModel) {}
   async processEvent(event: any) {
-    // const body = event.body ? JSON.parse(event.body) : null;
-    const data = await this.bookModel.getBook();
+    // Get pagination parameters from query string
+    const limit = event.queryStringParameters?.limit
+      ? parseInt(event.queryStringParameters.limit)
+      : 50;
+    const lastKey = event.queryStringParameters?.lastKey;
+
+    const result = await this.bookModel.getBook(limit, lastKey);
+
     return {
       statusCode: 200,
-      body: JSON.stringify({ books: data }),
+      body: JSON.stringify(result),
     };
   }
 }

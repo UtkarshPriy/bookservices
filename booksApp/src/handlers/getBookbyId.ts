@@ -22,13 +22,28 @@ export async function getBookbyId(event: any) {
   try {
     const bookModelInstance = createBookmodel();
     const instance = new getBookbyIdHandler(bookModelInstance);
-    return instance.processEvent(event);
-  } catch (error) {
-    console.log(error);
+    return await instance.processEvent(event);
+  } catch (error: any) {
+    console.error("Error fetching book:", error);
+
+    // Determine appropriate status code based on error
+    let statusCode = 500;
+    let message = "Internal server error";
+
+    if (error.message === "Book not found") {
+      statusCode = 404;
+      message = "Book not found";
+    } else if (error.message === "Invalid Id format") {
+      statusCode = 400;
+      message = "Invalid book ID format";
+    }
+
+    return {
+      statusCode,
+      body: JSON.stringify({
+        error: message,
+        details: error.message,
+      }),
+    };
   }
-  console.log("Book details supplied");
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: "Book details here" }),
-  };
 }
